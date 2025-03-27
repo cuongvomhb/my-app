@@ -1,8 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Dimensions } from "react-native";
 import { LineChart } from "react-native-chart-kit";
-
-const screenWidth = Dimensions.get("window").width;
 
 const data = {
   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
@@ -14,7 +12,24 @@ const data = {
   ],
 };
 
-export default function ChartScreen() {
+export default function LineChartComponent() {
+  const [screenWidth, setScreenWidth] = useState(Dimensions.get("window").width);
+
+  // Function to update screen width when resized
+  const updateScreenWidth = () => {
+    setScreenWidth(Dimensions.get("window").width);
+  };
+
+  // Add event listener for screen resize
+  useEffect(() => {
+    const subscription = Dimensions.addEventListener("change", updateScreenWidth);
+    
+    // Cleanup function
+    return () => {
+      subscription.remove(); // Prevent memory leaks
+    };
+  }, []);
+  
   return (
     <View style={{ alignItems: "center", marginVertical: 20 }}>
       <Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 10 }}>Sales Data</Text>

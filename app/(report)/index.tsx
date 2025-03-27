@@ -2,7 +2,8 @@ import MainLayout from "@/components/layout/_layout";
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { DataTable } from "react-native-paper";
-import ChartScreen from "./chart";
+import LineChartComponent from "../../components/report/LineChart";
+import BarChartComponent from "@/components/report/BarChart";
 
 const ReportScreen = () => {
   const tableData = [
@@ -15,7 +16,8 @@ const ReportScreen = () => {
   return (
     <MainLayout>
       <ScrollView style={styles.container}>
-        <ChartScreen />
+        <LineChartComponent />
+        <BarChartComponent />
         <TableSection title="Data Table" data={tableData} />
       </ScrollView>
     </MainLayout>

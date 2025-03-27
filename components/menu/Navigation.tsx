@@ -22,6 +22,7 @@ const screenOptions = ({ navigation }: any) => ({
 export default function AppNavigator() {
   return (
     <Drawer.Navigator
+      initialRouteName="index"
       drawerContent={(props) => <CustomDrawer {...props} menuItems={menuItems} />}
       screenOptions={screenOptions}
     >
