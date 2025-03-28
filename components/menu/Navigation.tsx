@@ -2,7 +2,7 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import CustomDrawer from "./CustomDrawer";
 import HomeScreen from "@/app/(home)";
-import ReportScreen from "@/app/(report)";
+import ReportScreen from "@/app/(report)/report";
 import CustomHeader from "../layout/Header";
 import UserProfile from "../user/Profile";
 import NotFoundScreen from "@/app/+not-found";
@@ -10,8 +10,8 @@ import NotFoundScreen from "@/app/+not-found";
 const Drawer = createDrawerNavigator();
 
 const menuItems = [
-  { label: "Home", icon: "home", route: "index" },
-  { label: "Report", icon: "bar-chart", route: "report" },
+  { label: "Home", icon: "home", route: "index", component: HomeScreen },
+  { label: "Report", icon: "bar-chart", route: "report", component: ReportScreen },
 ];
 
 const screenOptions = ({ navigation }: any) => ({
@@ -27,16 +27,11 @@ export default function AppNavigator() {
       screenOptions={screenOptions}
     >
       {menuItems.map((item) => (
-        <Drawer.Screen key={item.route} name={item.route} component={getComponent(item.route)} />
+        <Drawer.Screen key={item.route} name={item.route} component={item.component} />
       ))}
       <Drawer.Screen
         name="profile"
         component={UserProfile}
-      />
-      <Drawer.Screen
-        name="notfound"
-        component={NotFoundScreen}
-        options={{ title: "Not Found" }}
       />
       <Drawer.Screen
         name="*"
@@ -45,15 +40,4 @@ export default function AppNavigator() {
       />
     </Drawer.Navigator>
   );
-}
-
-function getComponent(route: string) {
-  switch (route) {
-    case "index":
-      return HomeScreen;
-    case "report":
-      return ReportScreen;
-    default:
-      return NotFoundScreen;
-  }
 }

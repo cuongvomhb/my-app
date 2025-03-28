@@ -38,5 +38,5 @@ const RootCustomLayoutNav = () => {
         </NavigationContainer>
       </NavigationIndependentTree>
     </GestureHandlerRootView>
-  )
+  );
 }

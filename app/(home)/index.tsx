@@ -1,13 +1,17 @@
-import MainLayout from "@/components/layout/_layout";
-import { OriginalLinkComponent } from "@/components/ultils/OriginalLink";
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export default function HomeScreen() {
-  return (<MainLayout>
-    <Text>Home index</Text>
-    <View>
-      <OriginalLinkComponent href="/report">Click here to report</OriginalLinkComponent>
+  const navigation = useNavigation();
+
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Welcome to the Home Screen</Text>
+      <Button
+        title="Go to Report"
+        onPress={() => navigation.navigate('report')}
+      />
     </View>
-  </MainLayout>)
+  );
 }

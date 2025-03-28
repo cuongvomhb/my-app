@@ -1,51 +1,45 @@
 import MainLayout from "@/components/layout/_layout";
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { DataTable } from "react-native-paper";
 import LineChartComponent from "../../components/report/LineChart";
 import BarChartComponent from "@/components/report/BarChart";
+import PieChartComponent from "@/components/report/PieChart";
+import TableComponent from "@/components/table/TableComponent";
+import CustomFilterComponent from "@/components/table/CustomFilter";
 
 const ReportScreen = () => {
-  const tableData = [
-    { month: "January", sales: 30 },
-    { month: "February", sales: 20 },
-    { month: "March", sales: 50 },
-    { month: "April", sales: 40 },
+  const sampleData = [
+    { id: 1, name: "Alice", age: 25, city: "New York" },
+    { id: 2, name: "Bob", age: 30, city: "Los Angeles" },
+    { id: 3, name: "Charlie", age: 35, city: "Chicago" },
+    { id: 4, name: "David", age: 28, city: "San Francisco" },
   ];
+  const config = {
+    search: true,
+    sort: true,
+    originalData: sampleData
+  }
+
+  const [tableData, setTableData] = React.useState(sampleData);
+
+  const onChange = (data: any) => {
+    setTableData(data);
+  }
 
   return (
     <MainLayout>
       <ScrollView style={styles.container}>
         <LineChartComponent />
         <BarChartComponent />
-        <TableSection title="Data Table" data={tableData} />
+        <PieChartComponent />
+        <SectionContainer title="Data Table">
+          <CustomFilterComponent data={tableData} onChange={onChange} config={config}/>
+          <TableComponent data={tableData} onChange={onChange} config={config}/>
+        </SectionContainer>
       </ScrollView>
     </MainLayout>
   );
 };
-
-const TableSection = ({
-  title,
-  data,
-}: {
-  title: string;
-  data: { month: string; sales: number }[];
-}) => (
-  <SectionContainer title={title}>
-    <DataTable>
-      <DataTable.Header>
-        <DataTable.Title>Month</DataTable.Title>
-        <DataTable.Title numeric>Sales</DataTable.Title>
-      </DataTable.Header>
-      {data.map((row, index) => (
-        <DataTable.Row key={index}>
-          <DataTable.Cell>{row.month}</DataTable.Cell>
-          <DataTable.Cell numeric>{row.sales}</DataTable.Cell>
-        </DataTable.Row>
-      ))}
-    </DataTable>
-  </SectionContainer>
-);
 
 const SectionContainer = ({
   title,
