@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import GlobalStyles from "@/constants/GlobalStyles";
-import { Dimensions, View } from "react-native";
+import { Dimensions } from "react-native";
 
-const MainLayout = ({ children }: any) => {
+const ComponentLayout = ({ children }: any) => {
+
   const [screenWidth, setScreenWidth] = useState(Dimensions.get("window").width);
-  console.log("Initial screen width:", children);
 
   // Function to update screen width when resized
   const updateScreenWidth = () => {
@@ -21,13 +20,15 @@ const MainLayout = ({ children }: any) => {
     };
   }, []);
 
-  return (
-    <View style={{ ...GlobalStyles.container, width: screenWidth }}>
-      <View style={GlobalStyles.bodyContainer}>
-        {children}
-      </View>
-    </View>
-  );
-};
+  const renderChildren = () => {
+    return React.cloneElement(children, {
+      screenWidth: screenWidth,
+    });
+  }
 
-export default MainLayout;
+  return (<>
+    {renderChildren()}
+  </>)
+}
+
+export default ComponentLayout;

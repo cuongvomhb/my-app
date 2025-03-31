@@ -6,6 +6,7 @@ import BarChartComponent from "@/components/report/BarChart";
 import PieChartComponent from "@/components/report/PieChart";
 import TableComponent from "@/components/table/TableComponent";
 import CustomFilterComponent from "@/components/table/CustomFilter";
+import ComponentLayout from "@/components/layout/_component-layout";
 
 const ReportScreen = () => {
   const sampleData = [
@@ -29,12 +30,15 @@ const ReportScreen = () => {
   return (
     <MainLayout>
       <ScrollView style={styles.container}>
-        <LineChartComponent />
+        <ComponentLayout>
+          <LineChartComponent />
+        </ComponentLayout>
+
         <BarChartComponent />
         <PieChartComponent />
         <SectionContainer title="Data Table">
-          <CustomFilterComponent data={tableData} onChange={onChange} config={config}/>
-          <TableComponent data={tableData} onChange={onChange} config={config}/>
+          <CustomFilterComponent data={tableData} onChange={onChange} config={config} />
+          <TableComponent data={tableData} onChange={onChange} config={config} />
         </SectionContainer>
       </ScrollView>
     </MainLayout>

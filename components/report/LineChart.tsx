@@ -12,24 +12,7 @@ const data = {
   ],
 };
 
-export default function LineChartComponent() {
-  const [screenWidth, setScreenWidth] = useState(Dimensions.get("window").width);
-
-  // Function to update screen width when resized
-  const updateScreenWidth = () => {
-    setScreenWidth(Dimensions.get("window").width);
-  };
-
-  // Add event listener for screen resize
-  useEffect(() => {
-    const subscription = Dimensions.addEventListener("change", updateScreenWidth);
-    
-    // Cleanup function
-    return () => {
-      subscription.remove(); // Prevent memory leaks
-    };
-  }, []);
-  
+export default function LineChartComponent({ screenWidth }: any) {
   return (
     <View style={{ alignItems: "center", marginVertical: 20 }}>
       <Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 10 }}>Sales Data</Text>
